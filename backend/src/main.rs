@@ -113,7 +113,8 @@ async fn main(
                 .service(get_users)
                 .service(get_speech)
                 .service(list_speech_files)
-                .service(upload_analysis),
+                .service(upload_analysis)
+                .service(endpoints::drive::upload_drive),
         )
         // serve the build files from the frontend
         .service(actix_files::Files::new("/", "./frontend/dist").index_file("index.html"))

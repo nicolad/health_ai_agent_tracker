@@ -13,6 +13,7 @@ use clerk_rs::{
 };
 use endpoints::files::list_speech_files;
 use endpoints::speech::get_speech;
+use endpoints::analysis::upload_analysis;
 use serde::{Deserialize, Serialize};
 use shuttle_actix_web::ShuttleActixWeb;
 use shuttle_runtime::SecretStore;
@@ -111,7 +112,8 @@ async fn main(
                 .service(get_user)
                 .service(get_users)
                 .service(get_speech)
-                .service(list_speech_files),
+                .service(list_speech_files)
+                .service(upload_analysis),
         )
         // serve the build files from the frontend
         .service(actix_files::Files::new("/", "./frontend/dist").index_file("index.html"))

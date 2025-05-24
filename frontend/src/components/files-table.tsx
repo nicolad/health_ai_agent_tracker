@@ -1,16 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { UserButton } from "@clerk/clerk-react";
-import { Loader } from "lucide-react";
+import { Loader, Table } from '@mantine/core';
+import { UserButton } from '@clerk/clerk-react';
 import useSWR from "swr";
 
 // Data shape returned by GET /api/speech/files
@@ -28,8 +20,8 @@ export default function FilesTable() {
   // 2) Handle loading / error states
   if (isLoading) {
     return (
-      <div className="flex items-center gap-2">
-        <Loader className="w-4 h-4 animate-spin" />
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <Loader />
         <span>Loading files...</span>
       </div>
     );
@@ -39,7 +31,7 @@ export default function FilesTable() {
   if (!data || data.length === 0) {
     return (
       <>
-        <div className="fixed top-6 right-6">
+        <div style={{ position: 'fixed', top: 24, right: 24 }}>
           <UserButton afterSignOutUrl="/" />
         </div>
         <p>No files found.</p>
@@ -50,41 +42,35 @@ export default function FilesTable() {
   // 4) Otherwise, render them in a table
   return (
     <>
-      <div className="fixed top-6 right-6">
+      <div style={{ position: 'fixed', top: 24, right: 24 }}>
         <UserButton afterSignOutUrl="/" />
       </div>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Timestamp</TableHead>
-            <TableHead>Audio</TableHead>
-            <TableHead>File</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
+      <Table striped highlightOnHover withColumnBorders>
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>Audio</th>
+            <th>File</th>
+          </tr>
+        </thead>
+        <tbody>
           {data.map((file: any, index: any) => (
-            <TableRow key={index}>
-              <TableCell>{file.timestamp}</TableCell>
-              <TableCell>
+            <tr key={index}>
+              <td>{file.timestamp}</td>
+              <td>
                 <audio controls>
                   <source src={file.file_path} type="audio/mpeg" />
                   Your browser does not support the audio element.
                 </audio>
-              </TableCell>
-              <TableCell>
-                {/* A clickable link to the .mp3 file path */}
-                <a
-                  href={file.file_path}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 underline"
-                >
+              </td>
+              <td>
+                <a href={file.file_path} target="_blank" rel="noopener noreferrer">
                   final.mp3
                 </a>
-              </TableCell>
-            </TableRow>
+              </td>
+            </tr>
           ))}
-        </TableBody>
+        </tbody>
       </Table>
     </>
   );

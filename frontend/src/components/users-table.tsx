@@ -1,14 +1,6 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { UserButton } from "@clerk/clerk-react";
-import { Loader } from "lucide-react";
+import { Avatar, Loader, Table } from '@mantine/core';
+import { UserButton } from '@clerk/clerk-react';
+
 import useSWR from "swr";
 
 export interface UserSchema {
@@ -24,37 +16,34 @@ export default function UsersTable() {
 
   return (
     <>
-      <div className="fixed top-6 right-6">
+      <div style={{ position: 'fixed', top: 24, right: 24 }}>
         <UserButton afterSignOutUrl="/" />
       </div>
-      {isLoading && <Loader className="w-4 h-4 animate-spin" />}
+      {isLoading && <Loader />}
       {!isLoading && (
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Avatar</TableHead>
-              <TableHead>First Name</TableHead>
-              <TableHead>Last Name</TableHead>
-              <TableHead>Username</TableHead>
-              <TableHead>Email</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
+        <Table striped highlightOnHover withColumnBorders>
+          <thead>
+            <tr>
+              <th>Avatar</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Username</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
             {data.map((user: UserSchema, i: number) => (
-              <TableRow key={i}>
-                <TableCell>
-                  <Avatar>
-                    <AvatarImage src={user?.profile_image_url} />
-                    <AvatarFallback>{user?.username}</AvatarFallback>
-                  </Avatar>
-                </TableCell>
-                <TableCell>{user?.first_name}</TableCell>
-                <TableCell>{user?.last_name}</TableCell>
-                <TableCell>{user?.username}</TableCell>
-                <TableCell>{user?.email_addresses?.[0].email_address}</TableCell>
-              </TableRow>
+              <tr key={i}>
+                <td>
+                  <Avatar src={user?.profile_image_url} radius="xl" />
+                </td>
+                <td>{user?.first_name}</td>
+                <td>{user?.last_name}</td>
+                <td>{user?.username}</td>
+                <td>{user?.email_addresses?.[0].email_address}</td>
+              </tr>
             ))}
-          </TableBody>
+          </tbody>
         </Table>
       )}
     </>

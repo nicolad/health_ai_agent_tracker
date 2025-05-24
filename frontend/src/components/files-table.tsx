@@ -28,8 +28,8 @@ export default function FilesTable() {
   // 2) Handle loading / error states
   if (isLoading) {
     return (
-      <div className="flex items-center gap-2">
-        <Loader className="w-4 h-4 animate-spin" />
+      <div>
+        <Loader />
         <span>Loading files...</span>
       </div>
     );
@@ -39,7 +39,7 @@ export default function FilesTable() {
   if (!data || data.length === 0) {
     return (
       <>
-        <div className="fixed top-6 right-6">
+        <div>
           <UserButton afterSignOutUrl="/" />
         </div>
         <p>No files found.</p>
@@ -50,7 +50,7 @@ export default function FilesTable() {
   // 4) Otherwise, render them in a table
   return (
     <>
-      <div className="fixed top-6 right-6">
+      <div>
         <UserButton afterSignOutUrl="/" />
       </div>
       <Table>
@@ -73,12 +73,7 @@ export default function FilesTable() {
               </TableCell>
               <TableCell>
                 {/* A clickable link to the .mp3 file path */}
-                <a
-                  href={file.file_path}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 underline"
-                >
+                <a href={file.file_path} target="_blank" rel="noopener noreferrer">
                   final.mp3
                 </a>
               </TableCell>

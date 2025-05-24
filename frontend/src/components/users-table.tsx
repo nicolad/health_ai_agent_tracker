@@ -24,10 +24,10 @@ export default function UsersTable() {
 
   return (
     <>
-      <div className="fixed top-6 right-6">
+      <div>
         <UserButton afterSignOutUrl="/" />
       </div>
-      {isLoading && <Loader className="w-4 h-4 animate-spin" />}
+      {isLoading && <Loader />}
       {!isLoading && (
         <Table>
           <TableHeader>

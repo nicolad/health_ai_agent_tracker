@@ -1,0 +1,13 @@
+:root {
+  --color-bg: #fff;
+  --color-text: #111;
+  --color-primary: #2684ff;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --font-scale-1: 0.875rem;
+  --font-scale-2: 1rem;
+  --font-scale-3: 1.25rem;
+  --font-scale-4: 1.5rem;
+}

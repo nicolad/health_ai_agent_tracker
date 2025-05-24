@@ -1,0 +1,3 @@
+.sideNav {padding:var(--space-2);width:200px;}
+.cluster {font-weight:bold;margin-top:var(--space-3);}
+.active {text-decoration:underline;}

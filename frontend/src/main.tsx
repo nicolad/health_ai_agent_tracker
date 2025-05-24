@@ -1,8 +1,10 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
-import { ClerkProvider } from '@clerk/clerk-react'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { MantineProvider } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
+import { ClerkProvider } from '@clerk/clerk-react';
+import App from './App.tsx';
+import { theme } from './theme';
 
 // Import your publishable key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
@@ -12,9 +14,10 @@ if (!PUBLISHABLE_KEY) {
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  <MantineProvider theme={theme} withNormalizeCSS withGlobalStyles>
+    <Notifications />
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <App />
     </ClerkProvider>
-  </React.StrictMode>,
-)
+  </MantineProvider>
+);

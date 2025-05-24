@@ -25,4 +25,5 @@ The backend serves the web page from the dist folder, and an auth-protected API 
 
 You can then do `shuttle deploy`, but consider switching to a production key from Clerk.
 The development key can still be used in `Secrets.dev.toml`.
-# health_ai_agent_tracker
+
+To enable Google Drive uploads, add `GOOGLE_DRIVE_TOKEN` to `backend/Secrets.toml`.
